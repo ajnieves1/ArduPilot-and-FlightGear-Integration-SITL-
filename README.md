@@ -8,6 +8,19 @@ The pipeline consists of four decoupled layers:
 
     Data Engineering Node: A Python based ROS node that ingests telemetry and serializes data for analysis.
 
+# How to run on your system:
+
+** NOTE ** 
+You also need to clone the official ardupilot repo: https://github.com/Ardupilot/ardupilot
+
+1. Clone this repo
+2. run "pixi install" 
+3. run "pixi run -e noetic setup-datasets"
+4. Open terminal 1 and run: cd "ardupilot/ArduCopter" & "../build/sitl/bin/arducopter --model + --defaults ../Tools/autotest/default_params/copter.parm"
+5. Open terminal 2 and run: "python3 -m MAVProxy.mavproxy --master=tcp:127.0.0.1:5760 --out=udp:127.0.0.1:14550 --map --console"
+6. Open terminal 3 and run: "pixi run -e noetic roslaunch mavros apm.launch fcu_url:=udp://127.0.0.1:14550@"
+7. Open terminal 4 and run: pixi run -e noetic python TelemetryProcessor.py
+
 
 1. Initialize venv:
     python3 -m venv drone_env
@@ -97,7 +110,7 @@ catkin_tools = "*"
 [feature.noetic.tasks]
 setup-gps = "wget -qO- https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh | bash"
 bridge = "roslaunch mavros apm.launch fcu_url:=tcp://127.0.0.1:5760"
-monitor = "python telemetry_node.py"
+monitor = "python telemetryNode.py" 
 start-sim = { depends-on = ["bridge", "monitor"] }
 
 ### ROS Humble ####
