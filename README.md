@@ -6,7 +6,7 @@ The pipeline consists of four decoupled layers:
 
     Abstraction Layer (MAVROS): Translates MAVLink protocol into ROS Topics.
 
-    Data Engineering Node: A Python based ROS node that ingests telemetry and serializes data for analysis.
+    Data Node: A Python based ROS node that ingests telemetry and serializes data for analysis.
 
 # How to run on your system:
 
