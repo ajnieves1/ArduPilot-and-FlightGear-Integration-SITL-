@@ -1,3 +1,14 @@
+The pipeline consists of four decoupled layers:
+
+    Flight Controller (SITL): Runs the ArduCopter firmware simulating Navio2 hardware.
+
+    Communication Gateway (MAVProxy): Multiplexes MAVLink packets and forwards streams via UDP.
+
+    Abstraction Layer (MAVROS): Translates MAVLink protocol into ROS Topics.
+
+    Data Engineering Node: A Python based ROS node that ingests telemetry and serializes data for analysis.
+
+
 1. Initialize venv:
     python3 -m venv drone_env
     source drone_env/bin/activate
